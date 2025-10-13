@@ -237,3 +237,94 @@ Domain `sirion.k61.com` → Redirect `ke www.k61.com`
 Hanya `www.k61.com` yang menjadi endpoint kanonik. 
 
 
+# Soal Nomor 14 - Log Tail
+“Catatan Kedatangan Harus Jujur” – Logging IP Asli Klien di Vingilot
+### Tujuan
+
+Memastikan bahwa server Vingilot (backend aplikasi) dapat mencatat IP address asli klien pada access log, meskipun trafik masuk melewati reverse proxy Sirion.
+Dengan kata lain, log di Vingilot tidak menampilkan IP Sirion (10.94.2.2), melainkan alamat IP pengguna yang sebenarnya.
+### Ditanya?
+
+“Pastikan access log aplikasi di Vingilot mencatat IP address klien asli saat lalu lintas melewati Sirion (bukan IP Sirion).”
+
+### Artinya kita harus mengatur:
+
+Sirion sebagai reverse proxy yang meneruskan IP klien lewat header
+Vingilot sebagai web server backend yang membaca header tersebut untuk dicatat di access log.
+
+### Langkah Implementasi
+### 1.Konfigurasi di Sirion
+
+File: `/etc/nginx/sites-available/sirion.conf`
+
+Sirion sudah berfungsi sebagai reverse proxy untuk `/static, /app, dan /admin.`
+
+Kita tambahkan tiga header penting:
+
+X-Real-IP → membawa IP asli klien
+
+X-Forwarded-For → mendukung proxy chain
+
+Host → agar hostname tetap sama
+```
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+```
+
+➡ Ini memastikan informasi IP asli klien dikirim ke backend (Lindon/Vingilot).
+
+### 2. Konfigurasi di Vingilot
+
+File: /etc/nginx/sites-available/vingilot.conf
+
+Buat custom log format bernama main:
+
+log_format main '$http_x_real_ip - $remote_user [$time_local] "$request" '
+                '$status $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for"';
+
+
+Gunakan format log tersebut di access log:
+
+access_log /var/log/nginx/access.log main;
+
+
+Jalankan PHP-FPM untuk aplikasi /app atau /admin.
+
+### 3. Testing
+
+Jalankan:
+```
+curl http://www.k61.com/app/
+```
+
+Lalu di Vingilot cek log:
+```
+tail -n 5 /var/log/nginx/access.log
+```
+
+### Hasil Diharapkan:
+
+#### Kolom IP di log menunjukkan IP asli klien (10.94.2.x atau host luar)
+```
+Bukan IP Sirion (10.94.2.2)
+```
+## Kesimpulan
+
+Sirion berhasil meneruskan header IP klien dengan proxy_set_header.
+
+Vingilot mencatat IP asli berkat custom log format.
+
+#### Access log kini jujur, sesuai permintaan soal: IP yang tercatat adalah IP pengguna sebenarnya,bukan IP dari reverse proxy.
+
+### File Terlibat :
+```/etc/nginx/sites-available/sirion.conf```
+
+```/etc/nginx/sites-available/vingilot.conf```
+
+```/var/log/nginx/access.log```
+### Uji akhir:
+```tail -n 5 /var/log/nginx/access.log``` menunjukkan IP asli klien.
+
+

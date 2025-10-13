@@ -57,7 +57,8 @@ nginx -s reload
 ## Pengujian
 ### Tes DNS resolusi
 `getent hosts www.k61.com`
-![11 test DNS resolusi](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/11-test-dns-resolusi.png?raw=true)
+![11 test DNS resolusi](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/11-test%20dns%20resolusi.png?raw=true)
+
 
 
 ### Test Local Connection

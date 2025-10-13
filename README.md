@@ -17,6 +17,9 @@ Header Host dan X-Real-IP harus diteruskan ke backend.
 Hasil akhirnya: konten dari /static dan /app muncul dari server yang sesuai.
 
 ## Langkah Eksekusi / Implementasi
+#### siapin dulu bahan web dummynya
+![index.php isi scrip dummy](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/index.php%20isi%20scrip%20dummy.png?raw=true)
+
 
 ### 1. instalasi Nginx di Sirion
 `apt install nginx -y`

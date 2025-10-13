@@ -248,6 +248,16 @@ Domain `sirion.k61.com` → Redirect `ke www.k61.com`
 
 Hanya `www.k61.com` yang menjadi endpoint kanonik. 
 
+### tidak semudah itu bejir gagal : ini dokum troubleshoot
+![2. troubleshout](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/2.%20troubleshout.png?raw=true)
+
+### cek process liat port, dll
+`ps aux`
+![cek proceses](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/cek%20proceses.png?raw=true)
+
+### Kita perlu add Ip alias dulu, jangan lupa verif buat cek ulang bener ga...
+![3. add ip alias, verif, ang test](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/3.%20add%20ip%20alias,%20verif,%20ang%20test.png?raw=true)
+
 
 # Soal Nomor 14 - Log Tail
 “Catatan Kedatangan Harus Jujur” – Logging IP Asli Klien di Vingilot

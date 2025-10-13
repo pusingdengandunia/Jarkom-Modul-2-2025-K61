@@ -328,6 +328,8 @@ Vingilot mencatat IP asli berkat custom log format.
 
 ```/var/log/nginx/access.log```
 ### Uji akhir:
+![Tail Log Vingilot](images/tail%20log-vingilot.png)
+
 ```tail -n 5 /var/log/nginx/access.log``` menunjukkan IP asli klien.
 
 

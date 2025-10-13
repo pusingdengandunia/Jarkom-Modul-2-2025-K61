@@ -95,6 +95,7 @@ Gunakan tool htpasswd (dari paket apache2-utils):
 
 `htpasswd -c /etc/nginx/.htpasswd admin`
 
+![1.setup auth dan adduser admin](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/1.setup%20auth%20dan%20adduser%20admin.png?raw=true)
 
 Masukkan password misalnya `admin900900`.
 

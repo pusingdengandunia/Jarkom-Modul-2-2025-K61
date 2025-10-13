@@ -169,3 +169,71 @@ Output:
 <h2>Selamat Datang di Halaman Admin Sound Horeg!</h2>
 <p>Server: 10.94.2.7</p>
 ```
+
+
+# Soal Nomor 13 - Kanokasi Endpoint
+
+### Permasalahan yang Diberikan:
+
+“Kanonisasikan endpoint, akses melalui IP address Sirion maupun sirion.<xxxx>.com harus redirect 301 ke www
+.<xxxx>.com sebagai hostname kanonik.”
+
+### Tujuan:
+Menetapkan www.k61.com
+ sebagai host kanonik utama.
+Semua akses ke:
+```
+IP (http://10.94.2.5/)
+```
+Domain non-www `(http://sirion.k61.com/)`
+harus otomatis redirect `301` ke `http://www.k61.com/`
+
+### Langkah Implementasi yang Kita Lakukan
+
+### 1, Tambahkan `IP alias 10.94.2.5 ke eth0` agar Sirion bisa menerima koneksi di IP itu:
+
+`ip addr add 10.94.2.5/24 dev eth0`
+
+
+### 2.Konfigurasi dua blok server di `/etc/nginx/sites-available/sirion.conf`:
+
+Blok redirect (non-kanonik):
+```bash
+server {
+    listen 80;
+    server_name 10.94.2.5 sirion.k61.com;
+    return 301 http://www.k61.com$request_uri;
+}
+```
+
+
+Blok utama (kanonik):
+```
+server {
+    listen 80;
+    server_name www.k61.com;
+    location / { proxy_pass http://10.94.2.7/; }
+}
+```
+
+### 3. Reload nginx agar konfigurasi baru aktif:
+```bash
+nginx -s reload
+```
+
+Verifikasi dengan curl:
+
+`curl -I http://10.94.2.5/`
+
+
+Hasilnya HTTP/1.1 301 Moved Permanently menuju Location: `http://www.k61.com/`.
+
+Hasil Akhir:
+
+`IP 10.94.2.5` → Redirect ke `www.k61.com` 
+
+Domain `sirion.k61.com` → Redirect `ke www.k61.com` 
+
+Hanya `www.k61.com` yang menjadi endpoint kanonik. 
+
+

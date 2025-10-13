@@ -148,6 +148,8 @@ Reload service:
 `nginx -s reload`
 
 ### 4. Pengujian Akses
+![2. access admin non credensial, salah credensial, dan bener](https://github.com/pusingdengandunia/Jarkom-Modul-2-2025-K61/blob/main/images/2.%20access%20admin%20non%20credensial,%20salah%20credensial,%20dan%20bener.png?raw=true)
+
 
 Tanpa kredensial:
 

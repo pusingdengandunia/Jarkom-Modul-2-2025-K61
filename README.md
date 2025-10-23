@@ -40,9 +40,6 @@ www     IN  A   10.94.2.2          ; IP Sirion
 - install bind9
 - konfig sebagai slave
 
-### Output yang diharapkan
-file ss
-
 # Nomor 5
 (tiap node)
 
@@ -53,8 +50,6 @@ Pertahankan resolv.conf di seluruh reboot pada node minimal
 # Nomor 6
 Cek apakah nilai SOA sama (dig @10.94.2.4 k61.com SOA & dig @10.94.2.5 k61.com SOA)
 
-### Output yang diharapkan
-file ss
 
 # Nomor 7
 (Tirion)
@@ -65,9 +60,6 @@ cek A record `dig sirion.k61.com(lindon/vingilot) @10.94.2.4`
 
 cek CNAME `dig www.k61.com @10.94.2.4`
 
-### Output yang diharapkan
-file ss
-
 # Nomor 8
 (Tirion)
 
@@ -76,9 +68,6 @@ Buat file reverse zone
 (Valmar)
 
 Buat slave reverse zone
-
-### Output yang diharapkan 
-file ss
 
 # Nomor 9
 (Valmar dan Tirion)

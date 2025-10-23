@@ -61,6 +61,7 @@ server {
 
 ln -s /etc/nginx/sites-available/static.k61.com /etc/nginx/sites-enabled/
 nginx -t
+nginx
 nginx -s reload
 
 #CLIENT TEST (di subnet yang sama dengan lindon)

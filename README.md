@@ -1,3 +1,14 @@
+### 1- 10
+### Dikerjakan Oleh Muhammad Afrizan Rasya (5027241048)
+
+# Nomor 1 dan 2
+<img width="831" height="601" alt="image" src="https://github.com/user-attachments/assets/02f4ba5f-1f89-471a-b58c-cc0b7baf922b" />
+
+Topologi 
+
+# Nomor 3
+Menggunakan `echo "nameserver 192.168.122.1" > /etc/resolv.conf` di semua node host non router
+
 ### 11-14
 ### Dikerjakan Oleh Ahmad Ibnu Athaillah (5027241024)
 

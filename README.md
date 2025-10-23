@@ -94,7 +94,8 @@ Buat agar nginx lindon berhasil serta dapat mengembalikan isi dari static web
 `curl http://static.k61.com/annals/`
 
 ### Harapan Output
-file ss
+<img width="665" height="111" alt="image" src="https://github.com/user-attachments/assets/e3c167cb-ad9c-4d94-966e-58d37ff28315" />
+
 
 # Nomor 10
 (Vingilot)

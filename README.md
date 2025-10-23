@@ -9,6 +9,129 @@ Topologi
 # Nomor 3
 Menggunakan `echo "nameserver 192.168.122.1" > /etc/resolv.conf` di semua node host non router
 
+# Nomor 4
+(tirion)
+
+- install bind9
+- edit named.conf.options bind
+- buat tirion sebagai master di named.conf.local
+- buat file zones yang berisi
+```
+  $TTL 604800
+@   IN  SOA ns1.k61.com. root.k61.com. (
+        2025101202 ; Serial
+        604800     ; Refresh
+        86400      ; Retry
+        2419200    ; Expire
+        604800 )   ; Negative Cache TTL
+
+; =========================
+;  ZONE: k61.com
+; =========================
+@       IN  NS  ns1.k61.com.
+@       IN  NS  ns2.k61.com.
+@       IN  A   10.94.2.2          ; Sirion (front door)
+ns1     IN  A   10.94.2.4          ; Tirion (ns1)
+ns2     IN  A   10.94.2.5          ; Valmar (ns2)
+www     IN  A   10.94.2.2          ; IP Sirion
+```
+(Valmar)
+
+- install bind9
+- konfig sebagai slave
+
+### Output yang diharapkan
+file ss
+
+# Nomor 5
+(tiap node)
+
+Tulis /etc/hosts dengan FQDN dan nama pendek
+
+Pertahankan resolv.conf di seluruh reboot pada node minimal
+
+# Nomor 6
+Cek apakah nilai SOA sama (dig @10.94.2.4 k61.com SOA & dig @10.94.2.5 k61.com SOA)
+
+### Output yang diharapkan
+file ss
+
+# Nomor 7
+(Tirion)
+Buat CNAME di db.k61.com
+
+(Client Lain)
+cek A record `dig sirion.k61.com(lindon/vingilot) @10.94.2.4`
+
+cek CNAME `dig www.k61.com @10.94.2.4`
+
+### Output yang diharapkan
+file ss
+
+# Nomor 8
+(Tirion)
+
+Buat file reverse zone
+
+(Valmar)
+
+Buat slave reverse zone
+
+### Output yang diharapkan 
+file ss
+
+# Nomor 9
+(Valmar dan Tirion)
+
+konfigurasi valmar sebagai slave dan Tirion sebagai master
+
+(Lindon)
+
+Buat agar nginx lindon berhasil serta dapat mengembalikan isi dari static web
+
+(Client Test)
+
+`curl http://static.k61.com/annals/`
+
+### Harapan Output
+file ss
+
+# Nomor 10
+(Vingilot)
+- Install nginx
+- Konfigurasi app.k61.com
+```
+server {
+    listen 80;
+    server_name app.k61.com;
+
+    root /var/www/app.k61.com;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /$uri.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+
+(Tirion)
+
+Buat agar memiliki konfigurasi app menuju ke vingilot
+
+### Harapan Output
+file ss
+
 ### 11-14
 ### Dikerjakan Oleh Ahmad Ibnu Athaillah (5027241024)
 

@@ -131,7 +131,8 @@ server {
 Buat agar memiliki konfigurasi app menuju ke vingilot
 
 ### Harapan Output
-file ss
+<img width="919" height="617" alt="image" src="https://github.com/user-attachments/assets/4dc78bd6-4feb-4f96-b72d-779e6933f49a" />
+
 
 ### 11-14
 ### Dikerjakan Oleh Ahmad Ibnu Athaillah (5027241024)

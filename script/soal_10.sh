@@ -33,6 +33,7 @@ server {
 ln -s /etc/nginx/sites-available/app.k61.com /etc/nginx/sites-enabled/
 rm /etc/nginx/sites-enabled/default
 nginx -t (output : harus OK)
+nginx
 nginx -s reload
 
 #Tirion
